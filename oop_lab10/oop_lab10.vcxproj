@@ -95,8 +95,6 @@
     <QtRcc Include="VectorEditor.qrc" />
     <QtUic Include="VectorEditor.ui" />
     <QtMoc Include="VectorEditor.h" />
-    <ClCompile Include="CartesianPlaneScene.cpp" />
-    <ClCompile Include="CartesianPlaneView.cpp" />
     <ClCompile Include="SmartPointer.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="VectorEditor.cpp" />
@@ -104,8 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector.h" />
-    <QtMoc Include="CartesianPlaneScene.h" />
-    <QtMoc Include="CartesianPlaneView.h" />
     <ClInclude Include="SmartPointer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,14 +1,13 @@
 ﻿#include "VectorEditor.h"
 
 VectorEditor::VectorEditor(QWidget* parent)
-    : QMainWindow(parent)
+    : QMainWindow(parent), scene(new QGraphicsScene(this))
 {
     ui.setupUi(this);
 
     setFixedSize(500, 500);
 
-    scene = new QGraphicsScene(this);
-    ui.view->setScene(scene);
+    ui.view->setScene(scene.get());
     ui.view->scale(1, -1);
     scene->addLine(-500, 0, 500, 0, QPen(Qt::black));
     scene->addLine(0, -500, 0, 500, QPen(Qt::black));
@@ -24,7 +23,14 @@ VectorEditor::VectorEditor(QWidget* parent)
 
 VectorEditor::~VectorEditor()
 {
-    delete scene;
+    deleteVectors();
+}
+
+
+void VectorEditor::deleteVectors()
+{
+    for (auto v : vectors)
+        delete v;
 }
 
 
@@ -71,7 +77,7 @@ QList<Vector*> VectorEditor::getSelectedVectors()
 {
     QList<Vector*> selectedVectors;
 
-    for (auto v : vectors)
+    for (Vector* v : vectors)
     {
         if (v->isSelected)
             selectedVectors.push_back(v);
@@ -93,7 +99,7 @@ void VectorEditor::onDeleteButtonClicked()
         return;
     }
 
-    for (auto v : selectedVectors)
+    for (Vector* v : selectedVectors)
     {
         scene->removeItem(v);
         vectors.removeOne(v);
@@ -119,7 +125,7 @@ void VectorEditor::onSumButtonClicked()
     QPointF start(0, 0);
     QPointF end(0, 0);
 
-    for (auto v : selectedVectors)
+    for (Vector* v : selectedVectors)
     {
         QPointF p1 = v->getStart();
         QPointF p2 = v->getEnd();

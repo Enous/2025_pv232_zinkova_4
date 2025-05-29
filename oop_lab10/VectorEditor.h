@@ -3,8 +3,10 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_VectorEditor.h"
 #include <QInputDialog>
-#include "Vector.h"
 #include <QMessageBox>
+#include "Vector.h"
+#include "SmartPointer.h"
+
 
 class VectorEditor : public QMainWindow
 {
@@ -12,11 +14,12 @@ class VectorEditor : public QMainWindow
 
 private:
     Ui::VectorEditorClass ui;
-    QGraphicsScene* scene;
+    SmartPointer<QGraphicsScene> scene;
     QList<Vector*> vectors;
 
     void addVector(Vector* v);
     QList<Vector*> getSelectedVectors();
+    void deleteVectors();
 
 public:
     VectorEditor(QWidget* parent = nullptr);

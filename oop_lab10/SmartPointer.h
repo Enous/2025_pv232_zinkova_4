@@ -40,7 +40,7 @@ public:
 	{
 		if (this != &obj)
 		{
-			delete data;   
+			delete data;
 			data = obj.data;
 			obj.data = nullptr;
 		}
